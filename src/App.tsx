@@ -12,6 +12,17 @@ import Services from "./pages/Services";
 import Certifications from "./pages/Certifications";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
+import Skills from "./components/Skills"; // path may vary
+
+function App() {
+  return (
+    <div className="App">
+      {/* ... other sections */}
+      <Skills />
+    </div>
+  );
+}
+
 
 const queryClient = new QueryClient();
 
