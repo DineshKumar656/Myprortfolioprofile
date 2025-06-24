@@ -1,16 +1,22 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
-import { db } from "@/firebase"; // Adjust based on your path
+import { db } from "../firebase"; // adjust path if needed
 
-
-export default function Skills() {
+const Skills = () => {
   const [skills, setSkills] = useState([]);
 
   useEffect(() => {
     const fetchSkills = async () => {
-      const querySnapshot = await getDocs(collection(db, "skills"));
-      const data = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-      setSkills(data);
+      try {
+        const querySnapshot = await getDocs(collection(db, "skills"));
+        const skillsList = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setSkills(skillsList);
+      } catch (error) {
+        console.error("Error fetching skills:", error);
+      }
     };
 
     fetchSkills();
@@ -18,14 +24,16 @@ export default function Skills() {
 
   return (
     <div>
-      <h2 className="text-xl font-bold mb-4">Skills</h2>
-      <ul className="grid grid-cols-2 gap-4">
-        {skills.map(skill => (
-          <li key={skill.id} className="p-2 bg-gray-100 rounded">
-            <strong>{skill.title}</strong> - {skill.level}
+      <h2>My Skills</h2>
+      <ul>
+        {skills.map((skill) => (
+          <li key={skill.id}>
+            {skill.name} - {skill.level}
           </li>
         ))}
       </ul>
     </div>
   );
-}
+};
+
+export default Skills;
