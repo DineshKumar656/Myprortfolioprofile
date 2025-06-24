@@ -1,9 +1,8 @@
-// src/components/Skills.jsx
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
-import db from "../firebaseConfig";
+import { db } from "@/firebase"; // Adjust based on your path
 
-const Skills = () => {
+export default function Skills() {
   const [skills, setSkills] = useState([]);
 
   useEffect(() => {
@@ -12,23 +11,20 @@ const Skills = () => {
       const data = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
       setSkills(data);
     };
+
     fetchSkills();
   }, []);
 
   return (
-    <section>
-      <h2 className="text-xl font-bold mb-4">My Skills</h2>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+    <div>
+      <h2 className="text-xl font-bold mb-4">Skills</h2>
+      <ul className="grid grid-cols-2 gap-4">
         {skills.map(skill => (
-          <div key={skill.id} className="p-4 border rounded shadow">
-            <img src={skill.iconURL} alt={skill.title} className="h-10 w-10 mb-2" />
-            <p>{skill.title}</p>
-            <small>{skill.level}</small>
-          </div>
+          <li key={skill.id} className="p-2 bg-gray-100 rounded">
+            <strong>{skill.title}</strong> - {skill.level}
+          </li>
         ))}
-      </div>
-    </section>
+      </ul>
+    </div>
   );
-};
-
-export default Skills;
+}
