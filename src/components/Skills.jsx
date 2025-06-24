@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "@/firebase"; // Adjust based on your path
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../firebase"; // path as per your structure
 
 export default function Skills() {
   const [skills, setSkills] = useState([]);
