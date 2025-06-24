@@ -1,10 +1,6 @@
 // src/firebase.js
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-export { db };
-
 const firebaseConfig = {
   apiKey: "AIzaSyBsd9Vra4-MboSWLElPzcrQSNo5CTt55Es",
   authDomain: "dinesh-portfolio-93b90.firebaseapp.com",
